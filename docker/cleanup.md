@@ -11,6 +11,8 @@ docker kill $(docker ps -q)
 ```
 docker rm $(docker ps -a -q)
 ```
+(`-f` It forces the removal of the container).
+
 
 ### Delete all 'untagged/dangling' (<none>) images
 ```
