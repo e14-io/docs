@@ -33,8 +33,9 @@ Iteración:
                  
 ### Plafinicación
 
-La planificación involucra la participación de uno o varios conocedores del negocio (conocidos como los **_on-site customers_**) de tomar las decisiones de negocios y mantener el rumbo correcto del proyecto. También son los responsables de clarificar dudas.  
-En base a las contestaciones del on-site customer, los programadores entregan estimaciones y sugerencias, que mezcladas con las prioridades que establece el cliente ayudaran a definir pequeñas entregas (_releases_) maximizando valor para el cliente. A este proceso se lo conoce como __planning game__.
+La planificación involucra la participación de uno o varios conocedores del negocio (conocidos como los **_on-site customers_**). 
+Los on-site customers son los encargados de tomar las decisiones de negocios y mantener el rumbo correcto del proyecto. También son los responsables de clarificar dudas.  
+En base a las contestaciones del on-site customer, los programadores entregan estimaciones y sugerencias, que mezcladas con las prioridades que establece el cliente, se logran definir pequeñas entregas (_releases_) que maximizan el valor para el cliente. A este proceso se lo conoce como __planning game__.
 
 
 ### Análisis
