@@ -92,3 +92,110 @@ export class CatsController {
 ```
 
 Es realmente simple. Nest provee de los decorators de la misma manera - `@Put()`, `@Delete()`, etc..
+
+## Async / await ##
+
+Amamos al JavaScript moderno, y sabemos que la extracción de datos es mayoritariamente asíncrona. Esa es la razón por la cual Nest soporta funciones `async`, y funciona muy bien con ellas.
+
+__PISTA__
+Puedes aprender más de async/await [aquí](https://kamilmysliwiec.com/typescript-2-1-introduction-async-await)
+
+Cada función async devuelve una `Promise`. Esto significa que puedes retornar valores diferidos y Nest los resolverá por si mismo. Veamos esto en un ejemplo:
+
+```
+@Get()
+async findAll(): Promise<any[]> {
+  return [];
+}
+```
+
+Es más, los handlers de Nest son aún más poderosos. Pueden devolver el flujo de `observables` de RxJS. Así que la migración entre la aplicación web y los microservicios de Nest sea mucho más simple.
+```
+@Get()
+findAll(): Observable<any[]> {
+  return Observable.of([]);
+}
+```
+
+## POST handler ##
+
+Es raroq ue hasta ahora los handlers de POST que vimos no aceptan ningun parámetro del cliente. Definitivamente deberíamos de esperar un `@Body()` aquí.
+
+Primero, debemos de establecer el esquema de `DTO` (Data Transfer Object). Podríamos hacer esto usando las interfaces de `TypeScript`, o simplemente clases. Puede sonar sorpresivo pero recomendaremos usar `clases`. ¿Por qué? Las clases son parte del standard ES6 de Javascript, por lo que son simplemente funciones planas. Por otro lado, las interfaces de TypeScript son eliminadas al momento de la transpilación, Nest no puede referirlas. Es importante porque funcionalidades como `Pipes` habilitan posibilidades adicionales cuando se puede acceder al `metatype` de la variable. 
+
+Creemos `CreateCatDto`:
+```
+export class CreateCatDto {
+  readonly name: string;
+  readonly age: number;
+  readonly breed: string;
+}
+```
+Sólamente tiene 3 propiedades básicas. Todas estas marcadas como `readonly`, porque deberíamos siempre que se puede hacer nuestras funciones lo más puras posibles. 
+
+Ahora podemos usar este esquema dentro del `CatsController`:
+
+```
+@Post()
+async create(@Body() createCatDto: CreateCatDto) {
+  // TODO: Add some logic here
+}
+```
+
+`Express` no parsea el body por defecto. Necesitamos el middleware para esto, que se llama [body-parser](https://github.com/expressjs/body-parser). El uso es muy sencillo, porque la instancia de Nest ya provee del método `use()`. El cual es un wrapper de la función nativa de Express con el mismo nombre.
+
+```
+import * as bodyParser from 'body-parser';
+import { NestFactory } from '@nestjs/core';
+import { ApplicationModule } from './modules/app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(ApplicationModule);
+  app.use(bodyParser.json());
+  await app.listen(3000);
+}
+bootstrap();
+```
+
+## Último paso ##
+
+El controller está listos para ser usado, pero Nest no sabe que `CatsController` existe, por lo que no creará una instancia de la clase hasta que no la importemos.
+
+El controller siempre pertenece a un módulo, y se ingresa en el array de controllers dentro del decorator `@Module()`. Dado que hasta el momento no tenemos ningún otro módulo excepto el principal (`AppModule`), usemos este por ahora:
+
+```
+import { Module } from '@nestjs/common';
+import { CatsController } from './cats/cats.controller';
+
+@Module({
+    controllers: [CatsController],
+})
+export class ApplicationModule {}
+```
+
+Tada! Acabamos de adjuntar la metadata a la clase del módulo, ahora Nest puede facilmente reflejar qué controllers tiene para poder ser inicializados.
+
+## El enfoque Express##
+
+La segunda forma de manipular las respuesta es usando el `response object` de Express. Fue la única opción disponible hasta Nest 4. Para inyectar el `response object`, necesitamos usar el decorator `@Res()` como ya mencionamos. Para mostrar la diferencia , vamos a reescribir el `CatsController`:
+
+```
+import { Controller, Get, Post, Res, Body, HttpStatus } from '@nestjs/common';
+import { CreateCatDto } from './dto/create-cat.dto';
+
+@Controller('cats')
+export class CatsController {
+  @Post()
+  create(@Res() res, @Body() createCatDto: CreateCatDto) {
+    // TODO: Add some logic here
+    res.status(HttpStatus.CREATED).send();
+  }
+
+  @Get()
+  findAll(@Res() res) {
+     res.status(HttpStatus.OK).json([]);
+  }
+}
+```
+
+Desde nuestro punto de vista, esta forma es mucho menos clara. El primer enfoque es preferido por sobre este, pero para lograr una compatiblidad hacia atrás con versiones previas, este segundo enfoque sigue disponible. Además, el `response object` da mayor flexibilidad - así tendrás mayor control de la respuesta.
