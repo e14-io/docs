@@ -164,4 +164,29 @@ Cada id en mongo es un arreglo de 12 bits. Los primeros cuatro refieren al times
 
 ```
 
-### Mongoose ORM
+### Mongoose
+
+Mongoose es un ORM (object relational mapping) para mongo. Permite estructurar nuestros datos utilizando modelos basados en esquemas. También incluye casteo de tipos, validaciones, construcción de consultas, lógica de negocios etc.
+
+http://mongoosejs.com/
+
+Para incluirlo en nuestro proyecto lo instalamos:
+
+```sh
+  npm i mongoose --save
+```
+Creamos y exportamos la conexión:
+
+```js
+  const mongoose = require('mongoose');
+
+  // We indicate to mongoose that we will be using the built-in promise library
+  mongoose.promise = global.Promise;
+
+  // Creating the connection
+  mongoose.connect('mongodb://localhost:27017/TodoApp');
+
+  // We export the connection object
+  // that way we can import it and use it in other modules
+  module.exports = { mongoose };
+```

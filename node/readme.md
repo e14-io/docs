@@ -34,6 +34,7 @@
 - [Búsqueda](https://github.com/BuiltByBROS/docs/blob/master/node/07-mongo.md#búsqueda)
 - [Eliminación](https://github.com/BuiltByBROS/docs/blob/master/node/07-mongo.md#eliminación)
 - [Actualización](https://github.com/BuiltByBROS/docs/blob/master/node/07-mongo.md#actualización)
+- [Mongoose](https://github.com/BuiltByBROS/docs/blob/master/node/07-mongo.md#mongoose)
 
 ---
 ## Resumen de algunos temas tratados en la [NodeConfAr17](https://2017.nodeconf.com.ar/)
