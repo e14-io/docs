@@ -1,4 +1,5 @@
-### Testing usando Mocha
+# Testing
+## Testing usando Mocha
 
 Ejemplo:
 ```js
@@ -42,7 +43,7 @@ Generalizando, en el package.json:
 
 ```
 
-### Usando jest
+## Usando jest
 
 ```sh
   $ npm i jest --save
@@ -79,7 +80,7 @@ Generalizando, en el package.json:
     });
   });
 ```
-### Test en funciones asíncronas.
+## Test en funciones asíncronas.
 
 De forma muy similar a como se testea código sincrónico, en este caso pasamos una función de callback que indica a mocha que se esta ejecutando una función asincrónica y que debe esperar a que esta termine para verificar los resultados.
 
@@ -92,7 +93,7 @@ De forma muy similar a como se testea código sincrónico, en este caso pasamos 
   })
 ```
 
-### Test de aplicaciones express.
+## Test de aplicaciones express.
 
 Para comenzar creamos una simple aplicación express:
 
@@ -131,7 +132,7 @@ Escribimos el test de la siguiente forma:
   })
 ```
 
-### Spies
+## Spies
 
 Las Spies son útiles para testear la invocación a funciones dentro de otras, sin realmente hacerlo. Para esto definimos una spy que reemplaza la función cuya invocación queremos probar por otra función con fines únicamente de prueba.
 
