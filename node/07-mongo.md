@@ -183,7 +183,7 @@ Creamos y exportamos la conexión:
   // We indicate to mongoose that we will be using the built-in promise library
   mongoose.promise = global.Promise;
 
-  // Creating the connection
+  // Creating the connection to our local mongodb server
   mongoose.connect('mongodb://localhost:27017/TodoApp');
 
   // We export the connection object
