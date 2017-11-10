@@ -7,3 +7,4 @@
  - [3 - Controllers](controllers.md)
  - [4 - Components](components.md)
  - [5 - Modules](modules.md)
+ - [6 - Middlewares](middlewares.md)

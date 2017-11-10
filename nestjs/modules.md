@@ -2,7 +2,7 @@
 
 Los módulos son las clases con el decorator `@Module()`, la metadata de este decorator es usada por `Nest` para organizar la estructura de la aplicación.
 
-![components](imgs/Modules_1.png)
+![modules](imgs/Modules_1.png)
 
 Cada aplicación Nest tiene al menos UN módulo (el `root module` o módulo principal). El `root module` es el lugar donde Nest empieza a organizar el árbol de la aplicación. De hecho, el `root module` podría ser el único módulo de tu aplicación, especialmente cuando tu app es pequeña.  
 En la práctica, vas a tener muchos módulos con un conjunto de capacidades fuertemente relacionadas.
