@@ -6,3 +6,4 @@
  - [2 - Primeros pasos](primeros-pasos.md)
  - [3 - Controllers](controllers.md)
  - [4 - Components](components.md)
+ - [5 - Modules](modules.md)
