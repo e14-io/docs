@@ -93,7 +93,29 @@ app.patch('/todos/:id', (req, res) => {
       res.status(400).send(e)
   })
 
-})
+});
+
+// DELETE /todos/:id
+
+app.delete('/todos/:id', (req, res) => {
+  const id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+    res.status(400).send()
+  }
+
+  Todo.findByIdAndRemove(id)
+    .then((todo) => {
+      if (!todo) {
+        res.send(404).send('Todo not found')
+      }
+      res.send({todo})
+    })
+    .catch((e) => {
+      res.status(400).send(e)      
+    })
+
+});
 
 // POST /users
 
