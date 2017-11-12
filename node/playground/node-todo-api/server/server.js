@@ -9,6 +9,7 @@ const { User } = require('./models/user');
 const { authenticate } = require('./middlewares/authenticate');
 
 const app = new express();
+const port = process.env.port || 3000;
 
 app.use(bodyParser.json());
 
@@ -144,8 +145,8 @@ app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
 })
 
-app.listen(3000, () => {
-  console.log('Started on port 3000')
+app.listen(port, () => {
+  console.log(`Started on port: ${port}`)
 });
 
 module.exports = { app }
