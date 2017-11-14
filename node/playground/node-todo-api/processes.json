@@ -1,7 +1,7 @@
 {
     "apps": [
         {
-            "name": "sagal-mp",
+            "name": "node-todo-api",
             "script": "npm run start",
             "merge_logs": true,
             "max_restarts": 20,
