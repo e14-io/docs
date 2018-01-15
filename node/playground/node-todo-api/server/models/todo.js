@@ -1,7 +1,6 @@
 const { mongoose } = require('../db/mongoose');
 
-// We define a model
-const Todo = mongoose.model('Todo', {
+const TodoSchema = new mongoose.Schema({
   text: {
     type: String,
     required: true,
@@ -16,19 +15,8 @@ const Todo = mongoose.model('Todo', {
     type: Number,
     default: null
   }
-});
+}, { bufferCommands: false });
 
-// const newTodo = new Todo({
-//   text: "Feed the cat",
-//   completed: true,
-//   completedAt: 123
-// });
-//
-// newTodo.save()
-//   .then((doc) => {
-//     console.log('Saved todo', doc)
-//   }, (e) => {
-//     console.log('Unable to save todo', e)
-//   })
+const Todo = mongoose.model('Todo', TodoSchema);
 
 module.exports = { Todo };
