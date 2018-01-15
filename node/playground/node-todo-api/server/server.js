@@ -13,6 +13,12 @@ const port = process.env.port || 3000;
 
 app.use(bodyParser.json());
 
+// GET /welcome
+
+app.get('/', (req, res) => {
+  res.status(200).send("Welcome to node-todo-api")
+});
+
 // POST /todos
 
 app.post('/todos', (req, res) => {
