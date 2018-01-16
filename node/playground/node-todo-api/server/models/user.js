@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema({
       required: true
     }
   }]
-});
+}, { bufferCommands: false });
 
 // We can write our own instance methods
 UserSchema.methods.generateAuthToken = function() {
@@ -87,17 +87,5 @@ UserSchema.statics.findByToken = function(token) {
 
 // We define a new model
 const User = mongoose.model('User', UserSchema);
-
-// const user = new User({
-//   email: "schubert@bros.me"
-// });
-//
-// user.save()
-//   .then((doc) => {
-//     console.log('Saved todo', doc)
-//   }, (e) => {
-//     console.log('Unable to save todo', e)
-//   })
-
 
 module.exports = { User };

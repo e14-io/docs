@@ -3,13 +3,19 @@ services:
     mongo:
       image: mongo
       container_name: mongodb
+      volumes:
+        - mongodata:/data/db
       ports:
         - "27017:27017"
     node-todo-api:
-        image: stabarez/node-todo-api:master
+        build: .
         depends_on:
             - mongo
         links:
             - mongo
         ports:
             - "3000:3000"
+
+volumes:
+    mongodata:
+        driver: local
