@@ -30,4 +30,4 @@ Each node has a unique ID which is used to access it via the Graph API. We speci
 
 #### Load the Graph API Explorer
 
-The easiest way to understand the Graph API is to use it with the Graph API Explorer, a low-level tool you can use to query, add and remove data. It's a very handy resource to have at your fingertips while you integrate with Facebook. So your next step is to go to the (Graph API Explorer)[https://developers.facebook.com/tools/explorer].
+The easiest way to understand the Graph API is to use it with the Graph API Explorer, a low-level tool you can use to query, add and remove data. It's a very handy resource to have at your fingertips while you integrate with Facebook. So your next step is to go to the [Graph API Explorer](https://developers.facebook.com/tools/explorer).
