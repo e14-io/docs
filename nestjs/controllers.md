@@ -40,7 +40,7 @@ Está prohibido usar ambos enfoques al mismo tiempo. Nest detecta si el handler 
 
 ## Request object ##
 
-Muchos de los endpoints necesitan un acceso al detalle de la request que manda el cliente. De hecho, Nest usa el `request object` de Express. Podemos forcar a Nest a inyectar el request object dentro del handler utilizando el decorator `@Req()`.
+Muchos de los endpoints necesitan un acceso al detalle de la request que manda el cliente. De hecho, Nest usa el `request object` de Express. Podemos forzar a Nest a inyectar el request object dentro del handler utilizando el decorator `@Req()`.
 
 __PISTA!__  
 Hay un paquete `@types/express` que recomendamos que utilicen firmemente.
