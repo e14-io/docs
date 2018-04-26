@@ -91,10 +91,9 @@ server {
         proxy_pass   http://localhost:3000/;
     }
 }
+```
 
 This configuration tells Nginx to listen on port 443. And indicates the path to the certificate we just got by running the previous command. We also need to add the proxy_pass configuration for the same reason we do before.
-
-```
 
 ## Renewal
 
