@@ -25,16 +25,17 @@ app.post('/todos', (req, res) => {
 
   const todo = new Todo({
     text: req.body.text
-  })
+  });
 
   todo.save()
     .then((doc) => {
       res.send(doc)
-    }, (e) => {
+    })
+    .catch((e) => {
       res.status(400).send(e)
     })
 
-})
+});
 
 // GET /todos
 
@@ -43,11 +44,11 @@ app.get('/todos', (req, res) => {
   Todo.find()
     .then((todos) => {
       res.send({todos})
-    }, (e) => {
-      res.status(400).send(e)
-  })
-
-})
+    })
+    .catch((e) => {
+        res.status(400).send(e)
+    })
+});
 
 app.get('/todos/:id', (req, res) => {
 
@@ -55,33 +56,30 @@ app.get('/todos/:id', (req, res) => {
 
   // Using mongoose we don't need to create an ObjectId to pass to find.
   // We can simply pass the string id.
-  // Although we need to create it to take advantage of the methods that allow us to validate the id.
 
-  if (!ObjectID.isValid(id)) {
-    res.status(400).send()
-  }
+  // if (!ObjectID.isValid(id)) {
+  //   res.status(400).send();
+  // }
 
-  Todo.findById(req.params.id)
+  Todo.findById(id)
     .then((todo) => {
       if (!todo) {
-        res.send(404).send('Todo not found')
+        res.status(404).send('Todo not found');
+      } else {
+        res.send({todo});
       }
-      res.send({todo})
-    }, (e) => {
-      res.status(400).send(e)
-  })
+    })
+    .catch((e) => {
+      res.status(400).send(e);
+    })
 
-})
+});
 
 // PATCH /todos
 
 app.patch('/todos/:id', (req, res) => {
   const id = req.params.id;
-  const body = _.pick(req.body, ["text", "completed"])
-
-  if (!ObjectID.isValid(id)) {
-    res.status(400).send()
-  }
+  const body = _.pick(req.body, ["text", "completed"]);
 
   if (_.isBoolean(body.completed) && body.completed) {
     body.completedAt = new Date().getTime();
@@ -93,12 +91,13 @@ app.patch('/todos/:id', (req, res) => {
   Todo.findByIdAndUpdate(id, {$set: body}, {new: true})
     .then((todo) => {
       if (!todo) {
-        res.send(404).send('Todo not found')
+        res.status(404).send('Todo not found')
       }
       res.send({todo})
-    }, (e) => {
-      res.status(400).send(e)
-  })
+    })
+    .catch((e) => {
+        res.status(400).send(e)
+    })
 
 });
 
@@ -107,19 +106,15 @@ app.patch('/todos/:id', (req, res) => {
 app.delete('/todos/:id', (req, res) => {
   const id = req.params.id;
 
-  if (!ObjectID.isValid(id)) {
-    res.status(400).send()
-  }
-
-  Todo.findByIdAndRemove(id)
+  return Todo.findByIdAndRemove(id)
     .then((todo) => {
       if (!todo) {
-        res.send(404).send('Todo not found')
+        return res.status(404).send('Todo not found');
       }
-      res.send({todo})
+      res.send({todo});
     })
     .catch((e) => {
-      res.status(400).send(e)      
+      res.status(400).send(e)
     })
 
 });
@@ -149,10 +144,10 @@ app.post('/users', (req, res) => {
 
 app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
-})
+});
 
 app.listen(port, () => {
   console.log(`Started on port: ${port}`)
 });
 
-module.exports = { app }
+module.exports = { app };
